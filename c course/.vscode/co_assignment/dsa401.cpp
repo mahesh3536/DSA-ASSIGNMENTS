@@ -104,11 +104,38 @@ public:
     }
 };
 int main(){
-    Queue* q=new Queue(5);
-    q->enQueue(5);
-    q->deQueue();
-    q->enQueue(6);
-    q->enQueue(7);
-    q->enQueue(8);
-    q->print();
+    int size;
+    cout << "Enter size of queue : " ;
+    cin>>size;
+    Queue* q=new Queue(size);
+    int val;
+    do{
+      cout << "1.Enter 1 for enqueue : "<<endl;
+      cout << "2.Enter 2 for dequeue : "<<endl;
+      cout<< "3.Enter 3 for printing printer data ..." <<endl;
+      cout << "4.Enter 4 for exit..." << endl;
+      cout << "Enter val : " ;
+      cin>>val;
+      switch(val){
+        case 1:
+        {   
+            int data ;
+            cout << "Enter file number for enqueue : ";
+            cin>>data;
+            q->enQueue(data);
+        }
+        break;
+        case 2:
+        {
+            cout << "deQueue element is : "<<q->deQueue();
+
+        }
+        break;
+        case 3:
+        {
+            cout << "Printing the queue..."<<endl;
+            q->print();
+        }
+      }
+    }while(val!=4);
 }
