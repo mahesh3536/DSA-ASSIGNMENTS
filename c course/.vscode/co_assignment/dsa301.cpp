@@ -108,21 +108,30 @@ node *odd(node *&head)
     }
     return temp->next;
 }
+//printing odd and even list 
 int main()
 {
     node *head = new node();
     node *tail = head;
-    int n;
-    cout << "Enter the size of linked list : ";
-    cin >> n;
-    for (int i = 0; i < n; i++)
+    cout << "Entering data in list1..." << endl;
+    int val;
+    do
     {
+        cout << "Enter 1 for inserting data in list..." << endl;
+        cout << "Enter number other than 1 to exit " << endl;
+        cin >> val;
+        if (val != 1)
+            break;
+        cout << "Enter data : " ;
         int data;
         cin >> data;
         inserttail(tail, data);
-    }
-
+    } while (val == 1);
+    cout << "Printing the list..." << endl;
+    print(head->next);
+    cout << "Printing the odd list..."<<endl;
     node *e = even(head->next);
+    cout << "Printing the even list..."<<endl;
     node *o = odd(head->next);
     print(e);
     print(o);
