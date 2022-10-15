@@ -1,4 +1,4 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 class Queue
 {
@@ -11,8 +11,9 @@ public:
     {
         this->size = d;
         arr = new int[d];
-        for(int i = 0;i<d;i++){
-            arr[i]=0;
+        for (int i = 0; i < d; i++)
+        {
+            arr[i] = 0;
         }
         this->f = -1;
         this->r = -1;
@@ -82,60 +83,84 @@ public:
         else if (f == r)
         {
             int x = arr[f];
-            arr[f]=0;
+            arr[f] = 0;
             f = -1;
             r = -1;
             return x;
         }
         else
-        {   
+        {
             int x = arr[f];
-            arr[f]=0;
+            arr[f] = 0;
             f = (f + 1) % size;
             return x;
         }
     }
-    void print(){
-        for(int i = 0;i<size;i++){
-            if(arr[i]==0) cout << "_" << " ";
-            else cout << arr[i] << " ";
+    void print()
+    {   if(f >= r && f!=0){
+        for (int i = f; i < size; i++)
+        {
+            if (arr[i] == 0)
+                cout << "_"
+                     << " ";
+            else
+                cout << arr[i] << " ";
         }
+        for (int i = 0;i<=r;i++){
+            if (arr[i] == 0)
+                cout << "_"
+                     << " ";
+            else
+                cout << arr[i] << " ";
+        }
+    }
+    else {
+        for(int i = 0 ;i<size;i++){
+             if (arr[i] == 0)
+                cout << "_"
+                     << " ";
+            else
+                cout << arr[i] << " ";
+        }
+    }
         cout << endl;
     }
 };
-int main(){
+int main()
+{
     int size;
-    cout << "Enter size of queue : " ;
-    cin>>size;
-    Queue* q=new Queue(size);
+    cout << "Enter size of queue : ";
+    cin >> size;
+    Queue *q = new Queue(size);
     int val;
-    do{
-      cout << "1.Enter 1 for enqueue : "<<endl;
-      cout << "2.Enter 2 for dequeue : "<<endl;
-      cout<< "3.Enter 3 for printing printer data ..." <<endl;
-      cout << "4.Enter 4 for exit..." << endl;
-      cout << "Enter val : " ;
-      cin>>val;
-      switch(val){
+    do
+    {
+        cout << "1.Enter 1 for enqueue : " << endl;
+        cout << "2.Enter 2 for dequeue : " << endl;
+        cout << "3.Enter 3 for printing printer data ..." << endl;
+        cout << "4.Enter 4 for exit..." << endl;
+        cout << "Enter val : ";
+        cin >> val;
+        switch (val)
+        {
         case 1:
-        {   
-            int data ;
+        {
+            int data;
             cout << "Enter file number for enqueue : ";
-            cin>>data;
+            cin >> data;
             q->enQueue(data);
         }
         break;
         case 2:
         {
-            cout << "deQueue element is : "<<q->deQueue();
-
+            cout << "deQueue element is : " << q->deQueue()<<endl;
         }
         break;
         case 3:
         {
-            cout << "Printing the queue..."<<endl;
+            cout << "Printing the queue..." << endl;
             q->print();
         }
-      }
-    }while(val!=4);
+        }
+    } while (val != 4);
 }
