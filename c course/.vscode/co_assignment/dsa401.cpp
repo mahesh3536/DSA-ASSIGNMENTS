@@ -97,7 +97,7 @@ public:
         }
     }
     void print()
-    {   if(f >= r && f!=0){
+    {   
         for (int i = f; i < size; i++)
         {
             if (arr[i] == 0)
@@ -106,23 +106,15 @@ public:
             else
                 cout << arr[i] << " ";
         }
-        for (int i = 0;i<=r;i++){
+        for (int i = 0;i<f;i++){
             if (arr[i] == 0)
                 cout << "_"
                      << " ";
             else
                 cout << arr[i] << " ";
         }
-    }
-    else {
-        for(int i = 0 ;i<size;i++){
-             if (arr[i] == 0)
-                cout << "_"
-                     << " ";
-            else
-                cout << arr[i] << " ";
-        }
-    }
+    
+   
         cout << endl;
     }
 };
