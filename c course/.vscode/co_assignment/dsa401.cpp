@@ -97,8 +97,9 @@ public:
         }
     }
     void print()
-    {   
-        for (int i = f; i < size; i++)
+    {  if(f==-1 && r==-1 ) cout << "queue is empty" << endl;
+       else {
+        for (int i = f; i <size; i++)
         {
             if (arr[i] == 0)
                 cout << "_"
@@ -116,7 +117,9 @@ public:
     
    
         cout << endl;
+       }
     }
+    
 };
 int main()
 {

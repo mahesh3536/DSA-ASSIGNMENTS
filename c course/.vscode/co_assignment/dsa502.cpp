@@ -81,57 +81,6 @@ node *buildTree(node *root)
     cout << "Enter in right of " << data << "..." << endl;
     root->right = buildTree(root->right);
 }
-node *minvalueInBst(node *root)
-{
-    node *temp = root;
-    while (temp != NULL)
-    {
-        temp = temp->left;
-    }
-    return temp;
-}
-node *deleteFromBst(node *&root, int val)
-{
-    if (root == NULL)
-    {
-        return NULL;
-    }
-    if (root->data == val)
-    {
-        if (root->left == NULL && root->right == NULL)
-        {
-            delete root;
-            return NULL;
-        }
-        else if (root->left != NULL && root->right == NULL)
-        {
-            node *temp = root->left;
-            delete root;
-            return temp;
-        }
-        else if (root->left == NULL && root->right != NULL)
-        {
-            node *temp = root->right;
-            delete root;
-            return temp;
-        }
-        else
-        {
-            int temp = minvalueInBst(root->right)->data;
-            root->data = temp;
-            root->right = deleteFromBst(root->right, temp);
-            return root;
-        }
-    }
-    else if (val < root->data)
-    {
-        root->left = deleteFromBst(root->left, val);
-    }
-    else
-    {
-        root->right = deleteFromBst(root->right, val);
-    }
-}
 bool searchInBst(node *root, int key)
 {
     if (root == NULL)
@@ -147,11 +96,72 @@ bool searchInBst(node *root, int key)
         return searchInBst(root->right, key);
     }
 }
+node *minvalueinbst(node *&root)
+{
+    node *temp = root;
+    while (temp->left != NULL)
+    {
+        temp = temp->left;
+    }
+    return temp;
+}
+node *maxvalueinbst(node *&root)
+{
+    node *temp = root;
+    while (temp->right != NULL)
+    {
+        temp = temp->right;
+    }
+    return temp;
+}
+node *deletefrombst(node* root, int val)
+{
+    if (root == NULL)
+    {
+        return root;
+    }
+    else if (root->data == val)
+    {
+        if (root->left == NULL && root->right == NULL)
+        {
+            delete root;
+            return NULL;
+        }
+        else if (root->left != NULL && root->right == NULL)
+        {
+            node *temp = (root->left);
+            delete root;
+            return temp;
+        }
+        else if (root->left == NULL && root->right != NULL)
+        {
+            node *temp = (root->right);
+            delete root;
+            return temp;
+        }
+        else
+        {
+            int mini = minvalueinbst(root->right) -> data;
+            root->data = mini;
+            root->right = deletefrombst(root->right, mini);
+            return root;
+        }
+    }
+    else if (root->data > val)
+    {
+        root->left = deletefrombst(root->left, val);
+    }
+    else
+    {
+        root->right = deletefrombst(root->right, val);
+    }
+}
 int main()
 {
     node *root = NULL;
     takeinput(root);
     // 25 20 10 5 12 22 36 30 28 40 38 48 -1
+    
     int val;
     do
     {
@@ -171,6 +181,7 @@ int main()
             cout << "Enter data for inserting : ";
             int data;
             cin >> data;
+            
             insertinbst(root, data);
             cout << "Inserting successfully done " << endl;
         }
@@ -180,7 +191,7 @@ int main()
             cout << "Enter data for deleting : ";
             int data;
             cin >> data;
-            deleteFromBst(root, data);
+            root = deletefrombst(root,val);
             cout << "Deleting successfully done : " << endl;
         }
         break;
