@@ -186,7 +186,7 @@ int main()
         break;
         case 3:
         {
-            cout << "Enter data for searching : " << endl;
+            cout << "Enter data for searching : " ;
             int data;
             cin >> data;
             if (searchInBst(root, data))

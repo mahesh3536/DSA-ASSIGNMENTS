@@ -1,9 +1,8 @@
 #include <iostream>
-#include<math.h>
+#include <math.h>
 using namespace std;
 class node
 {
-
 public:
     int data;
     node *left;
@@ -71,6 +70,7 @@ node *buildTree(node *root)
     root->left = buildTree(root->left);
     cout << "Enter in right of " << data << "..." << endl;
     root->right = buildTree(root->right);
+   // return root;
 }
 int main()
 {
