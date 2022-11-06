@@ -1,1 +1,5 @@
-25 20 10 5 12 22 36 30 28 40 38 48 -1
+bool linearSearch(int Arr[],int n,int comparisons,int swaps){
+//     for(int i = 0;i<n;i++){
+//         if()
+//     }
+// }
