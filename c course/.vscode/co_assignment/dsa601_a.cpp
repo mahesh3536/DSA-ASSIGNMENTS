@@ -11,13 +11,17 @@ void insertionsort(int arr[], int n,int* comparisons,int* swaps)
             if (arr[j] > temp)
             {
                 arr[j + 1] = arr[j];
+                (*swaps)++;
             }
             else
             {
                 break;
             }
         }
-        arr[j + 1] = temp;
+        if(arr[j+1]!=temp){
+            arr[j+1] = temp;
+            (*swaps)++;
+        }
     }
 }
 void bubbleSort(int arr[],int n,int comparisons,int swaps){

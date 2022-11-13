@@ -1,167 +1,169 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
-class Node{
-   public:
-   string branch;
-   string name;
-   int reg_num;
-   int CGPA;
-   Node* next;
-   Node(string b,string n,int num,int CG){
-    this->branch = b;
-    this->name = n;
-    this->reg_num = num;
-    this->CGPA = CG;
-    this->next = NULL;
-   }
+
+struct data {
+	int Rengn_no ;
+	string Name;
+	string Branch;
+	float CGPA ;
 };
 
-void insertAtTail(Node* &head,Node* &tail,string branch,string name,int reg,int CGPA){
-    if(head==NULL && tail == NULL){
-        Node* temp = new Node(branch,name,reg,CGPA);
-        head = temp ;
-        tail = temp;
-    }
-    else {
-        Node* temp = new Node(branch,name,reg,CGPA);
-        tail->next = temp;
-        tail = temp;
-    }
-}
-Node* linearSearch(Node* head,int key){
-    Node* curr = head;
-    while(curr!=NULL){
-        if(curr->reg_num == key){
-            return curr;
-        }
-        curr = curr->next;
-    }
-    return NULL;
-}
-void bubbleSort(Node* head){
-    Node* curr = head;
-    while(curr!=NULL){
-        Node* temp = curr->next;
-        while(temp!=NULL){
-            if(curr->reg_num > temp->reg_num){
-                swap(curr->branch,temp->branch);
-                swap(curr->reg_num,temp->reg_num);
-                swap(curr->name,temp->name);
-                swap(curr->CGPA,temp->CGPA);
-            }
-            temp = temp->next;
-        }
-        curr = curr->next;
-    }
-}
-Node *findmid(Node *head)
-{
-    Node *slow = head;
-    Node *fast = head->next;
-    while (fast && fast->next)
-    {
-        slow = slow->next;
-        fast = fast->next;
-        fast = fast->next;
-    }
-    return slow;
-}
-Node* binarySearch(Node* head,int key){
-   Node* start = head;
-   Node* last = NULL;
-   do{
-      Node* mid = findmid(start);
-      if(mid==NULL) return NULL;
-      if(mid->reg_num == key) return mid;
-      if(mid->reg_num < key) {
-        start = mid->next;
-      }
-      else last = mid;
-   }while(last==NULL || last!=start);
-}
-Node* insertionSortList(Node* head){
-   Node* dummy = new Node("hello","hello",-1,-1);
-   dummy->next = head;
-   Node* prev = head;
-   Node* curr = head->next;
-   while(curr){
-    if(curr->CGPA >=prev->CGPA){
-        prev = curr;
-        curr = curr->next;
-        continue;
-    }
-    Node* temp = dummy;
-    while(curr->CGPA > temp->next->CGPA){
-        temp = temp->next;
-    }
-    prev->next = curr->next;
-    curr->next = temp->next;
-    temp->next = curr;
-    curr = prev->next;
-   }
-  return dummy->next;
-}
-int main(){
-  Node* head = NULL;
-  Node* tail = head;
-  cout << "Enter total Number of Students : " ;
-  int n;
-  cin >> n;
-  for(int i = 0;i<n;i++){
-    string branch;
-    cout << "Enter Branch : " ;
-    cin >> branch;
-    string name;
-    cout << "Enter Name : ";
-    cin >> name;
-    int reg_num ;
-    cout << "Enter reg-num : ";
-    cin >> reg_num;
-    int CGPA;
-    cout << "Enter CGPA : ";
-    cin >> CGPA;
-    insertAtTail(head,tail,branch,name,reg_num,CGPA);
-  }
-  // A part 
-//   cout << endl; 
-//   int key ;
-//   cout << "Enter reg number for linearSearch : ";
-//   cin >> key;
-//   cout << endl;
-//   Node* find = linearSearch(head,key);
-//   if(find==NULL) cout << "Key not found" << endl;
-//   else {
-//     cout << "Key found" << endl;
-//     cout << "Data of student ..."<< endl;
-//     cout << "Name : " << find->name << endl;
-//     cout << "Branch : "<<find->branch << endl;
-//     cout << "Reg-Num : " << find->reg_num << endl;
-//     cout << "CGPA : " << find->CGPA << endl; 
-//   }
 
-//   //B part  
+void show_one(struct data d) {
+	cout << endl << "		Rengn_no : " << d.Rengn_no << "\n		Name : " << d.Name << "\n		Branch : " << d.Branch << "\n		CGPA : " << d.CGPA << endl;
+}
 
-//   bubbleSort(head);
-//   cout << endl;
-//   //C part 
-//    cout << "Enter reg number for binarySearch : " ;
-//    cin >> key;
-//    find = binarySearch(head,key);
-//    cout << endl;
-//   if(find == NULL) cout << "Key not Found" << endl;
-//   else {
-//     cout << "Key Found " << endl;
-//     cout << "Data of student ..."<< endl;
-//     cout << "Name : " << find->name << endl;
-//     cout << "Branch : "<<find->branch << endl;
-//     cout << "Reg-Num : " << find->reg_num << endl;
-//     cout << "CGPA : " << find->CGPA << endl; 
-//   }
-    Node* newHead = insertionSortList(head);
-    Node* curr = newHead;
-    while(curr){
-        cout << curr->CGPA << " " << curr->reg_num << endl;
-        curr = curr->next;
-    }
-    
+void show(struct data list[]) {
+
+	for (int i = 0; i < 10; ++i)
+	{
+		cout << "Data of student " << i + 1 << " : ";
+		show_one(list[i]);
+	}
+}
+
+void a(struct data list[]) {
+	int no;
+	cout << "Enter Rengn_no : ";
+	cin >> no;
+
+	for (int i = 0; i < 10; ++i)
+	{
+		if (list[i].Rengn_no == no) {
+			show_one(list[i]);
+			return;
+		}
+	}
+	cout << "Not Found !!!\n";
+}
+
+void b(struct data list[]) {
+
+	for (int i = 0; i < 10; ++i)
+	{
+		for (int j = 0; j < (10 - i - 1); ++j)
+		{
+			if (list[j].Rengn_no > list[j + 1].Rengn_no) {
+				struct data temp = list[j];
+				list[j] = list[j + 1];
+				list[j + 1] = temp;
+			}
+
+		}
+	}
+}
+
+void c(struct data list[]) {
+	int no;
+	cout << "Enter Rengn_no : ";
+	cin >> no;
+
+	int s = 0 , l = 9 , m;
+
+	while (s <= l) {
+		m = (s + l) / 2;
+
+		if (list[m].Rengn_no > no) l = m - 1;
+		else if (list[m].Rengn_no < no) s = m + 1;
+
+		else {show_one(list[m]); return;}
+
+	}
+
+	cout << "Not Found !!!\n";
+}
+
+void d(struct data list[]) {
+
+	struct data temp;
+
+	for (int i = 1; i < 10; ++i)
+	{
+		temp = list[i];
+
+		int j = i;
+
+		while (j > 0 && list[j - 1].CGPA < temp.CGPA ) {
+			list[j] = list[j - 1];
+			j--;
+		}
+
+		list[j] = temp;
+
+	}
+
+}
+
+int main() {
+
+	struct data list[10];
+	int ch ;
+
+	cout << "0. User input\n" << "1. defualt input\n" << "Enter your ans : ";
+	cin >> ch;
+
+	// user input
+	if (ch == 0) {
+		cout << "Order : Rangn_no Name Branch CGPA \n";
+
+		for (int i = 0; i < 10; ++i)
+		{
+			cout << "Enter data of student " << i + 1 << " : ";
+			cin >> list[i].Rengn_no >> list[i].Name >> list[i].Branch >> list[i].CGPA;
+		}
+	}
+	// defualt
+	else {
+		int Rengn_no_list[] = {1, 6, 24, 574, 124, 82, 325, 32, 978, 234};
+		float CGPA_list[] = {9.12 , 4.1, 3.5, 9, 1.9 , 1.23, 9.99 , 7.89 , 6.5 , 5 } ;
+		string name_list[] = {"dumi1" , "dumi2" , "dumi3", "dumi4", "dumi5", "dumi6", "dumi7", "dumi8", "dumi9", "dumi10"};
+
+		for (int i = 0; i < 10; ++i)
+		{
+			list[i].Rengn_no = Rengn_no_list[i];
+			list[i].Name = name_list[i];
+			list[i].Branch = "CSE";
+			list[i].CGPA = CGPA_list[i];
+		}
+		show(list);
+	}
+	int ans;
+
+	do
+	{
+		cout << "1. OP a\n" << "2. OP b\n" << "3. OP c\n" << "4. OP d\n" << "5. OP show list\n" << "0. Exit\n\n";
+		cout << "Enter ans : ";
+		cin >> ans;
+
+		switch (ans) {
+		case 1:
+			a(list);
+			break;
+
+		case 2:
+			b(list);
+			break;
+
+		case 3:
+			c(list);
+			break;
+
+		case 4:
+			d(list);
+			break;
+
+		case 5:
+			show(list);
+			break;
+		}
+
+
+	} while (ans != 0);
+
+
+
+
+
+
+	return 0;
 }
