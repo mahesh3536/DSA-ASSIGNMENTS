@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<math.h>
 void addBinary(char nums1[8],char nums2[8]){
     int count = 0;
     int carry = 0;
@@ -31,6 +32,15 @@ void ashr(char ac[8],char qr[8]){
         ac[i] = ac[i-1];
     }
 }
+int decimal(char ans[16]){
+    int final = 0;
+    int j = 0;
+    for(int i = 15;i>=0;i--){
+       final = final += (pow(2,j) * (ans[i]-48));
+       j++;
+    }
+    return final;
+}
 int main(){
     char qr[8];
     char br[8];
@@ -56,10 +66,16 @@ int main(){
         q=qr[7];
         ashr(ac,qr);
     }
-    for(int i =0;i<=7;i++) {
-        printf("%c",ac[i]);
-    }
+    char ans[16];
     for(int i = 0;i<=7;i++){
-        printf("%c",qr[i]);
+        ans[i] = ac[i];
     }
+    for(int i = 8 ;i<=15;i++){
+        ans[i] = qr[i-8];
+    }
+
+    for(int i=0;i<16;i++){
+        printf("%c",ans[i]);
+    }
+    printf("\n%d",decimal(ans));
 }
